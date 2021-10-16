@@ -1,2 +1,5 @@
 export { default as Hi } from './hi'
 export { default as Header } from './header'
+export { default as Grid } from './grid'
+export { default as ActiveLink } from './link'
+export { default as Scope } from './scope'

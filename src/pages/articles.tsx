@@ -1,9 +1,10 @@
 import React from 'react'
+import { ActiveLink, Scope } from '@atoms'
 
 const Articles = () => (
-    <main className="flex justify-center items-center w-full min-h-screen">
-        <span>Articles</span>
-    </main>
+  <Scope base="/articles">
+    <ActiveLink href="/grid">Grid</ActiveLink>
+  </Scope>
 )
 
 export default Articles
