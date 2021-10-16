@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],
+      "allowJs": false,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": false,
+      "forceConsistentCasingInFileNames": true,
+      "module": "commonjs",
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "jsx": "react",
+      "baseUrl": "./src",
+      "paths": {
+        "@pages": ["./pages/index.tsx"],
+        "@pages/*": ["./pages/*"],
+        "@layouts": ["./layouts/index.ts"],
+        "@layouts/*": ["./layouts/*"],
+        "@components": ["./components/index.ts"],
+        "@components/*": ["./components/*"],
+        "@styles/*": ["./styles/*"],
+        "@services": ["./services/index.ts"],
+        "@services/*": ["./services/*"],
+        "@models": ["./models/*"],
+        "@models/*": ["./models/*"],
+        "@stores": ["./stores/index.ts"],
+        "@stores/*": ["./stores/*"],
+        "@atoms": ["./components/atoms/index.ts"],
+        "@atoms/*": ["./components/atoms/*"],
+        "@molecules": ["./components/molecules/index.ts"],
+        "@molecules/*": ["./components/molecules/*"],
+        "@organisms": ["./components/organisms/index.ts"],
+        "@organisms/*": ["./components/organisms/*"],
+      }
+    },
+    "include": ["tools"],
+    "exclude": ["src"]
+}
+  

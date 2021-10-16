@@ -1,0 +1,39 @@
+{
+  "name": "src",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "postbuild": "ts-node --project tsconfig.build.json tools/prerender.ts",
+    "start": "serve -p 3000 dist"
+  },
+  "dependencies": {
+    "preact": "^10.5.14",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "wouter": "^2.7.4"
+  },
+  "devDependencies": {
+    "@prefresh/vite": "^2.2.3",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "@types/html-minifier": "^4.0.1",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^16.6.1",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react-refresh": "^1.3.1",
+    "autoprefixer": "^10.3.1",
+    "html-minifier": "^4.0.0",
+    "module-alias": "^2.2.2",
+    "postcss": "^8.3.6",
+    "preact-render-to-string": "^5.1.19",
+    "sass": "^1.38.0",
+    "serve": "^12.0.0",
+    "tailwindcss": "^2.2.7",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.4.4"
+  }
+}
