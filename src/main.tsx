@@ -4,6 +4,7 @@ import { render, hydrate } from 'react-dom'
 import Router from '@pages'
 
 import 'tailwindcss/tailwind.css'
+import './styles/style.scss'
 
 const tree = (
     <React.StrictMode>

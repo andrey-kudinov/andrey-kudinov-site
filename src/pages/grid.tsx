@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { Hi } from '@atoms'
-
-const Landing = () => (
+const Grid = () => (
     <main className="flex justify-center items-center w-full min-h-screen">
-        <Hi />
+        <span>Grid</span>
     </main>
 )
 
-export default Landing
+export default Grid
