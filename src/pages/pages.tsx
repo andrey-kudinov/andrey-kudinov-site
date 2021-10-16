@@ -11,7 +11,7 @@ export const map: Record<string, Function> = {
   '/articles': Articles,
   '/about': About,
   '/hire': Hire,
-  '/articles/grid': Grid,
+  // '/articles/grid': Grid,
   default: NotFound
 } as const
 
