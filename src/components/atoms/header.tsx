@@ -1,6 +1,5 @@
 import React from 'react'
 import ActiveLink from './link'
-import '@styles/base/content.scss'
 
 const Header = () => {
   const [isActive, setIsActive] = React.useState(false)
