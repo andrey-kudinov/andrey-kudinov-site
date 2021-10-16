@@ -1,0 +1,12 @@
+.content {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(0.5rem, 1fr)
+    [content-start] minmax(0, 1024px)
+    [content-end] minmax(0.5rem, 1fr)
+    [full-end];
+}
+
+.content > * {
+  grid-column: content;
+}
