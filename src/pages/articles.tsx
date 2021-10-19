@@ -1,11 +1,18 @@
+import { Header } from '@atoms'
 import React from 'react'
-import { ActiveLink, Scope } from '@atoms'
+import { Link, useLocation } from 'wouter'
 
-const Articles = () => (
-  // <Scope base="/articles">
-  //   <ActiveLink href="/grid">Grid</ActiveLink>
-  // </Scope>
-  <span>Articles</span>
-)
+const Articles = () => {
+  // const [location, setLocation] = useLocation(); 
+
+  return (
+    <>
+      <span>Articles</span>
+      {/* <Header /> */}
+      <Link href="/articles/grid">Grid</Link>
+      {/* <a onClick={() => setLocation("/articles/grid")}>Click to update</a> */}
+    </>
+  )
+}
 
 export default Articles
