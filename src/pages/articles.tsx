@@ -1,6 +1,6 @@
-import { Header } from '@atoms'
+// import { Header } from '@atoms'
 import React from 'react'
-import { Link, useLocation } from 'wouter'
+// import { Link, useLocation } from 'wouter'
 
 const Articles = () => {
   // const [location, setLocation] = useLocation(); 
@@ -9,7 +9,8 @@ const Articles = () => {
     <>
       <span>Articles</span>
       {/* <Header /> */}
-      <Link href="/articles/grid">Grid</Link>
+      {/* <Link href="/articles/grid">Grid</Link> */}
+      <a href="/articles/grid">Grid</a>
       {/* <a onClick={() => setLocation("/articles/grid")}>Click to update</a> */}
     </>
   )
