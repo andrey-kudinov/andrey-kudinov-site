@@ -2,16 +2,15 @@ import React from 'react'
 
 import useLocation from 'wouter/use-location'
 
-import { Home, NotFound, Articles, About, Hire } from './'
+import { Home, NotFound, Articles, About, Hire, Grid } from './'
 import { Header } from '@atoms'
-import { Grid } from '@pages/articles/'
 
 export const map: Record<string, Function> = {
   '/': Home,
   '/articles': Articles,
   '/about': About,
   '/hire': Hire,
-  // '/articles/grid': Grid,
+  '/articles/grid': Grid,
   default: NotFound
 } as const
 

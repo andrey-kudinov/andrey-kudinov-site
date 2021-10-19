@@ -52,7 +52,7 @@ const main = async () => {
       new Promise(async (resolve, reject) => {
         let fileName = pageName
 
-        if (fileName === 'landing') fileName = 'index'
+        if (fileName === 'home') fileName = 'index'
 
         writeFile(`./dist/${fileName}.html`, prerender, (error) => {
           if (error) reject(pageName)
