@@ -1,74 +1,74 @@
-// import { addAliases } from 'module-alias'
-// import { config } from '../vite.config'
-// import type { Alias } from 'vite'
+import { addAliases } from 'module-alias'
+import { config } from '../vite.config'
+import type { Alias } from 'vite'
 
-// const aliases: Record<string, string> = {}
+const aliases: Record<string, string> = {}
 
-// const configAliases = config.resolve.alias as Alias[]
+const configAliases = config.resolve.alias as Alias[]
 
-// configAliases.forEach(({ find, replacement }) => {
-//   if (typeof find === 'string') aliases[find] = replacement
-// })
+configAliases.forEach(({ find, replacement }) => {
+  if (typeof find === 'string') aliases[find] = replacement
+})
 
-// addAliases(aliases)
+addAliases(aliases)
 
-// // * ----------------------------- * //
+// * ----------------------------- * //
 
-// import { renderToString } from 'react-dom/server'
-// import { writeFile, readFileSync } from 'fs'
-// import { minify } from 'html-minifier'
+import { renderToString } from 'react-dom/server'
+import { writeFile, readFileSync } from 'fs'
+import { minify } from 'html-minifier'
 
-// import { map } from '../src/pages/pages'
+import { map } from '../src/pages/pages'
 
-// const template = readFileSync('./dist/index.html')
-// const prerenders: Promise<string>[] = []
+const template = readFileSync('./dist/index.html')
+const prerenders: Promise<string>[] = []
 
-// const remapPage = {
-//   '/': 'home',
-//   '/articles': 'articles',
-//   '/about': 'about',
-//   '/hire': 'hire',
-//   '/articles/grid': 'grid',
-//   default: '404'
-// } as const
+const remapPage = {
+  '/': 'home',
+  '/articles': 'articles',
+  '/about': 'about',
+  '/hire': 'hire',
+  '/articles/grid': 'grid',
+  default: '404'
+} as const
 
-// const blackList = ['default'] as const
+const blackList = ['articles'] as const
 
-// const main = async () => {
-//   Object.keys(map).forEach(async (page) => {
-//     const pageName = remapPage[page] || page
+const main = async () => {
+  Object.keys(map).forEach(async (page) => {
+    const pageName = remapPage[page] || page
 
-//     if (blackList.includes(pageName)) return
+    if (blackList.includes(pageName)) return
 
-//     const { default: component } = require(`../src/pages/${pageName}.tsx`)
+    const { default: component } = require(`../src/pages/${pageName}.tsx`)
 
-//     const markup: string =
-//       typeof component === 'string' ? component : renderToString(component())
+    const markup: string =
+      typeof component === 'string' ? component : renderToString(component())
 
-//     let prerender = `${template}`.replace('<!-- app -->', markup)
-//     prerender = minify(prerender)
+    let prerender = `${template}`.replace('<!-- app -->', markup)
+    prerender = minify(prerender)
 
-//     prerenders.push(
-//       new Promise(async (resolve, reject) => {
-//         let fileName = pageName
-//         console.log(pageName)
+    prerenders.push(
+      new Promise(async (resolve, reject) => {
+        let fileName = pageName
+        console.log(pageName)
 
-//         if (fileName === 'home') fileName = 'index'
+        if (fileName === 'home') fileName = 'index'
 
-//         writeFile(`./dist/${fileName}.html`, prerender, (error) => {
-//           if (error) reject(pageName)
-//           resolve(pageName)
-//         })
-//       })
-//     )
-//   })
+        writeFile(`./dist/${fileName}.html`, prerender, (error) => {
+          // if (error) reject(pageName)
+          resolve(pageName)
+        })
+      })
+    )
+  })
 
-//   try {
-//     await Promise.all(prerenders)
-//   } catch (page) {
-//     console.warn(`Failed to prerender on page ${page}`)
-//     process.exit(1)
-//   }
-// }
+  try {
+    await Promise.all(prerenders)
+  } catch (page) {
+    console.warn(`Failed to prerender on page ${page}`)
+    process.exit(1)
+  }
+}
 
-// main()
+main()
