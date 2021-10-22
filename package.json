@@ -2,9 +2,9 @@
   "name": "src",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 8080",
     "build": "tsc && vite build",
-    "serve": "vite preview",
+    "serve": "vite preview --port 8080",
     "postbuild": "ts-node --project tsconfig.build.json tools/prerender.ts",
     "start": "serve -p 3000 dist"
   },
