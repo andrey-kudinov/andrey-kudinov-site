@@ -1,7 +1,9 @@
 import React from 'react'
 
 const Grid = () => {
-  const code = `
+  const exampleFirst = `
+    #### Плавное уменьшение отступов по бокам
+    
     .page {
       display: grid;
       grid-template-columns:
@@ -14,9 +16,7 @@ const Grid = () => {
       grid-column: main;
     }
 
-    <Example_1 />
-
-    #### Возможность выходить за пределы контента (main)
+    #### Возможность выходить за пределы контента
 
     Например:
 
@@ -25,18 +25,84 @@ const Grid = () => {
     }
   `
 
+  const exampleSecond = `
+    #### Возможность создавать блоки с адаптивными размерами
+
+    .page {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+      grid-template-rows: min-content;
+      gap: 1rem;
+    }
+  `
+
+  const exampleThird = `
+    #### Или делать тоже самое, но заполнять оставшееся место в строке
+
+    .page {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+      grid-template-rows: min-content;
+      gap: 1rem;
+    }
+  `
+
   return (
-    <>
+    <div className="grid gap-4 w-full">
       <pre>
-        {code}
+        {exampleFirst}
       </pre>
-      <p className="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="QWMGEZz" data-user="AndreyKudinov" style={{ height: '300px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid', margin: '1em 0', padding: '1em' }}>
-        <span>See the Pen <a href="https://codepen.io/AndreyKudinov/pen/QWMGEZz">
-          Untitled</a> by Andrey Kudinov (<a href="https://codepen.io/AndreyKudinov">@AndreyKudinov</a>)
-          on <a href="https://codepen.io">CodePen</a>.</span>
-      </p>
-      <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </>
+
+      <iframe
+        className="w-full"
+        height="500"
+        scrolling="no"
+        title="Grid Page"
+        src="https://codepen.io/AndreyKudinov/embed/QWMGEZz?default-tab=result"
+        frameBorder="no"
+        loading="lazy"
+      >
+        See the Pen <a href="https://codepen.io/AndreyKudinov/pen/QWMGEZz"> Grid Page</a>
+        by Andrey Kudinov(<a href="https://codepen.io/AndreyKudinov"> @AndreyKudinov</a>)
+        on <a href="https://codepen.io">CodePen</a>.
+      </iframe>
+
+      <pre>
+        {exampleSecond}
+      </pre>
+
+      <iframe
+        className="w-full"
+        height="500"
+        scrolling="no"
+        title="Grid Auto Fill"
+        src="https://codepen.io/AndreyKudinov/embed/PoKbrpm?default-tab=result"
+        frameBorder="no"
+        loading="lazy"
+      >
+        See the Pen <a href="https://codepen.io/AndreyKudinov/pen/QWMGEZz"> Grid Auto Fill</a>
+        by Andrey Kudinov(<a href="https://codepen.io/AndreyKudinov"> @AndreyKudinov</a>)
+        on <a href="https://codepen.io">CodePen</a>.
+      </iframe>
+
+      <pre>
+        {exampleThird}
+      </pre>
+
+      <iframe
+        className="w-full"
+        height="500"
+        scrolling="no"
+        title="Grid Auto Fit"
+        src="https://codepen.io/AndreyKudinov/embed/jOLVjYp?default-tab=result"
+        frameBorder="no"
+        loading="lazy"
+      >
+        See the Pen <a href="https://codepen.io/AndreyKudinov/pen/jOLVjYp"> Grid Auto Fit</a>
+        by Andrey Kudinov(<a href="https://codepen.io/AndreyKudinov"> @AndreyKudinov</a>)
+        on <a href="https://codepen.io">CodePen</a>.
+      </iframe>
+    </div>
   )
 }
 
