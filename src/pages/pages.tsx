@@ -22,7 +22,7 @@ const Router = () => {
   return (
     <div className="min-h-screen page">
       <Header />
-      <main className="place-items-center w-full content py-4">
+      <main className="place-items-center w-full content py-4 overflow-x-hidden">
         <Page />
       </main>
     </div>

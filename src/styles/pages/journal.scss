@@ -1,9 +1,36 @@
 .journal {
-  display: grid;
-  grid-template-columns: 20% auto;
-  grid-template-rows: 10% auto;
+  td {
+    position: relative;
+  }
 
-  &__row {
-    display: flex;
+  td input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2rem;
+    height: 2rem;
+    opacity: 0;
+  }
+
+  td input + label::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    content: '';
+  }
+
+  td input + label::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+  }
+
+  td input:checked + label::after {
+    background: tomato;
   }
 }
