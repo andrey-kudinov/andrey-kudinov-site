@@ -6,6 +6,7 @@ const Header = () => {
   const links = [
     { label: 'Home', link: '/' },
     { label: 'Articles', link: '/articles' },
+    { label: 'Journal', link: '/journal' },
     { label: 'About Me', link: '/about' },
     { label: 'Hire Me', link: '/hire' },
   ]

@@ -1,0 +1,9 @@
+.journal {
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 10% auto;
+
+  &__row {
+    display: flex;
+  }
+}
