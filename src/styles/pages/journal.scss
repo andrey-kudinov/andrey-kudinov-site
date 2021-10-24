@@ -40,7 +40,8 @@
     width: 10rem;
     border-top: none;
     border-bottom: none;
-    background-color: antiquewhite;
+
+    @apply bg-red-100;
   }
 
   .cell:nth-child(2) {

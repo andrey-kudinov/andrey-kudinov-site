@@ -18,7 +18,9 @@ interface IData {
 ;[]
 
 const Journal = () => {
-  let [isOpen, setOpen] = React.useState(false)
+  const [isOpen, setOpen] = React.useState(false)
+  const [data, setData] = React.useState(null)
+  const textareaRef = React.useRef(null)
 
   const getDays = (start: Date, end: Date) => {
     const daysArray = []
@@ -44,18 +46,28 @@ const Journal = () => {
   const cellClass =
     'whitespace-nowrap py-2 px-2 border border-solid border-black cell'
 
+  const currentDay = new Intl.DateTimeFormat('ru-RU', {
+    day: '2-digit'
+  }).format(new Date())
+  const currentMonth = new Intl.DateTimeFormat('ru-RU', {
+    month: 'long'
+  }).format(new Date())
+
   const daysRender = days.map((day) => {
-    return day.day === '01' ? (
-      <td className={`text-green-600 font-bold ${cellClass}`}>{day.day}</td>
-    ) : day.dayWeek === 'сб' || day.dayWeek === 'вс' ? (
-      <td className={`text-red-600 font-bold ${cellClass}`}>{day.day}</td>
-    ) : (
-      <td className={`font-bold ${cellClass}`}>{day.day}</td>
-    )
+    let currentClass =
+      day.day === '01'
+        ? `text-green-600 font-bold ${cellClass}`
+        : day.dayWeek === 'сб' || day.dayWeek === 'вс'
+        ? `text-red-600 font-bold ${cellClass}`
+        : `font-bold ${cellClass}`
+
+    day.day === currentDay && day.month === currentMonth
+      ? (currentClass += ' bg-yellow-100')
+      : ''
+    return <td className={currentClass}>{day.day}</td>
   })
 
   daysRender.unshift(<td className={`first-col ${cellClass}`}>&nbsp;</td>)
-
   const rows = []
   let i = 0
   const labels = [
@@ -70,15 +82,21 @@ const Journal = () => {
     'Side projects'
   ]
 
-  const data: IData = localStorage.getItem('data')
-    ? JSON.parse(localStorage.getItem('data'))
-    : days.map((day) => {
-        let obj = { ...day }
-        labels.forEach(
-          (label) => (obj[label.toLowerCase().replaceAll(' ', '-')] = false)
-        )
-        return obj
-      })
+  React.useEffect(() => {
+    const data: IData = localStorage.getItem('data')
+      ? JSON.parse(localStorage.getItem('data'))
+      : days.map((day) => {
+          let obj = { ...day }
+          labels.forEach(
+            (label) => (obj[label.toLowerCase().replaceAll(' ', '-')] = false)
+          )
+          return obj
+        })
+
+    setData(data)
+
+    console.log(data)
+  }, [])
 
   const onChange = (e: any) => {
     const numCol = e.target.dataset.numCol
@@ -87,43 +105,67 @@ const Journal = () => {
 
     data[numCol][label] = !data[numCol][label]
 
-    localStorage.setItem('data', JSON.stringify(data))
+    localStorage.setItem('data', JSON.stringify(data, null, 2))
+
+    if (textareaRef && textareaRef.current) {
+      textareaRef.current.value = JSON.stringify(data, null, 2)
+    }
   }
 
-  while (i < labels.length) {
-    const row = []
-    let n = 0
+  if (data) {
+    while (i < labels.length) {
+      const row = []
+      let n = 0
 
-    while (n < days.length) {
-      const random = Math.floor(Math.random() * 1e6)
+      while (n < days.length) {
+        const random = Math.floor(Math.random() * 1e6)
 
-      row.push(
-        <>
-          <td className={cellClass}>
-            &nbsp;
-            <input
-              id={`input-${i}-${random}`}
-              name="input"
-              type="checkbox"
-              data-num-row={i}
-              data-num-col={n}
-              onChange={onChange}
-              checked={data[n][labels[i].toLowerCase().replaceAll(' ', '-')]}
-            />
-            <label htmlFor={`input-${i}-${random}`}></label>
-          </td>
-        </>
-      )
+        row.push(
+          <>
+            <td className={cellClass}>
+              &nbsp;
+              <input
+                id={`input-${i}-${random}`}
+                name="input"
+                type="checkbox"
+                data-num-row={i}
+                data-num-col={n}
+                onChange={onChange}
+                checked={data[n][labels[i].toLowerCase().replaceAll(' ', '-')]}
+              />
+              <label htmlFor={`input-${i}-${random}`}></label>
+            </td>
+          </>
+        )
 
-      n++
+        n++
+      }
+
+      rows.push(<tr>{row}</tr>)
+
+      // add label
+      row.unshift(<td className={`first-col ${cellClass}`}>{labels[i]}</td>)
+
+      i++
     }
+  }
 
-    rows.push(<tr>{row}</tr>)
+  const getData = () => {
+    console.log('%c%s', 'background: pink;', 'output -', data)
+    if (textareaRef && textareaRef.current) {
+      textareaRef.current.value = JSON.stringify(data, null, 2)
+      setOpen(true)
+    }
+  }
 
-    // add label
-    row.unshift(<td className={`first-col ${cellClass}`}>{labels[i]}</td>)
-
-    i++
+  const applyData = () => {
+    let value = ''
+    if (textareaRef && textareaRef.current) {
+      value = textareaRef.current.value
+      setData(JSON.parse(value))
+      localStorage.setItem('data', JSON.stringify(data, null, 2))
+      setOpen(false)
+    }
   }
 
   return (
@@ -146,9 +188,7 @@ const Journal = () => {
 
       <button
         className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 mb-4 rounded-full flex items-center"
-        onClick={() =>
-          console.log('%c%s', 'background: pink;', 'output -', data)
-        }
+        onClick={getData}
       >
         <svg
           className="fill-current w-4 h-4 mr-2"
@@ -161,22 +201,30 @@ const Journal = () => {
       </button>
 
       <button
-        className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 mb-4 rounded-full flex items-center"
+        className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 mb-4 rounded-full inline-flex items-center"
         onClick={() => setOpen((isOpen = !isOpen))}
       >
         <span>Upload data</span>
       </button>
 
-      {isOpen && (
-        <label className="block text-left">
-          <span className="text-gray-700">Paste here</span>
-          <textarea
-            className="form-textarea mt-1 block w-full"
-            rows="10"
-            placeholder="Data"
-          ></textarea>
-        </label>
-      )}
+      <button
+        className={`bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 ml-4 mb-4 rounded-full inline-flex items-center ${
+          isOpen ? '' : 'hidden'
+        }`}
+        onClick={applyData}
+      >
+        <span>Apply</span>
+      </button>
+
+      <label className={`block text-left ${isOpen ? '' : 'hidden'}`}>
+        <span className="text-gray-700">Paste here</span>
+        <textarea
+          ref={textareaRef}
+          className="form-textarea mt-1 block w-full"
+          rows="40"
+          placeholder="Data"
+        ></textarea>
+      </label>
     </div>
   )
 }
