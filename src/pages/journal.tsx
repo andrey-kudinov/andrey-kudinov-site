@@ -1,27 +1,14 @@
 import React from 'react'
 
 interface IData {
-  day: string
-  dayWeek: string
-  month: string
-  year: string
-  algorithms?: boolean
-  'lessons-with-a-tutor'?: boolean
-  'pair-coding-!'?: boolean
-  react?: false
-  'react-native-?'?: boolean
-  'self-study-english'?: boolean
-  'shopify-!'?: boolean
-  'side-projects'?: boolean
-  'small-talks'?: boolean
+  [key: string]: Record<string, any>
 }
-;[]
 
 const Journal = () => {
   let [isOpen, setOpen] = React.useState(false)
-  const [data, setData] = React.useState(null)
-  const textareaRef = React.useRef(null)
-  const tableRef = React.useRef(null)
+  const [data, setData] = React.useState<IData | null>(null)
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+  const tableRef = React.useRef<HTMLTableElement>(null)
 
   const getDays = (start: Date, end: Date) => {
     const daysArray = []
@@ -85,9 +72,9 @@ const Journal = () => {
 
   React.useEffect(() => {
     const data: IData = localStorage.getItem('data')
-      ? JSON.parse(localStorage.getItem('data'))
+      ? JSON.parse(localStorage.getItem('data') || '')
       : days.map((day) => {
-          let obj = { ...day }
+          let obj: Record<string, any> = { ...day }
           labels.forEach(
             (label) => (obj[label.toLowerCase().replaceAll(' ', '-')] = false)
           )
@@ -95,16 +82,16 @@ const Journal = () => {
         })
 
     setData(data)
-
-    console.log(data)
   }, [])
 
   const onChange = (e: any) => {
-    const numCol = e.target.dataset.numCol
-    const numRow = e.target.dataset.numRow
-    const label = labels[numRow].toLowerCase().replaceAll(' ', '-')
+    const numCol: string = e.target.dataset.numCol
+    const numRow: number = e.target.dataset.numRow
+    const label: string = labels[numRow].toLowerCase().replaceAll(' ', '-')
 
-    data[numCol][label] = !data[numCol][label]
+    if (data) {
+      data[numCol][label] = !data[numCol][label]
+    }
 
     localStorage.setItem('data', JSON.stringify(data, null, 2))
 
@@ -153,18 +140,20 @@ const Journal = () => {
 
   const getData = () => {
     console.log('%c%s', 'background: pink;', 'output -', data)
-    if (textareaRef && textareaRef.current) {
+    if (textareaRef.current) {
       textareaRef.current.value = JSON.stringify(data, null, 2)
       setOpen(true)
       setTimeout(() => {
-        textareaRef.current.scrollIntoView({ behavior: 'smooth' })
-      }, 0);
+        if (textareaRef.current) {
+          textareaRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 0)
     }
   }
 
   const applyData = () => {
     let value = ''
-    if (textareaRef && textareaRef.current) {
+    if (tableRef.current && textareaRef.current) {
       if (textareaRef.current.value.length < 100) {
         textareaRef.current.value = 'Error!'
         return
