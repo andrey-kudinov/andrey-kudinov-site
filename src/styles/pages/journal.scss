@@ -33,4 +33,17 @@
   td input:checked + label::after {
     background: tomato;
   }
+
+  .first-col {
+    position: absolute;
+    z-index: 1;
+    width: 10rem;
+    border-top: none;
+    border-bottom: none;
+    background-color: antiquewhite;
+  }
+
+  .cell:nth-child(2) {
+    padding-left: 10.5rem;
+  }
 }
