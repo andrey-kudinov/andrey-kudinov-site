@@ -29,10 +29,11 @@ const remapPage = {
   '/about': 'about',
   '/hire': 'hire',
   '/articles/grid': 'grid',
+  '/journal': 'journal',
   default: '404'
 } as const
 
-const blackList = ['articles'] as const
+const blackList = ['articles', 'journal'] as const
 
 const main = async () => {
   Object.keys(map).forEach(async (page) => {

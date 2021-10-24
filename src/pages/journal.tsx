@@ -232,7 +232,7 @@ const Journal = () => {
         <textarea
           ref={textareaRef}
           className="form-textarea mt-1 block w-full"
-          rows="40"
+          rows={40}
           placeholder="Data"
         ></textarea>
       </label>
