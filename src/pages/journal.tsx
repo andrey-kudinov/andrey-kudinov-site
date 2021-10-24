@@ -18,9 +18,10 @@ interface IData {
 ;[]
 
 const Journal = () => {
-  const [isOpen, setOpen] = React.useState(false)
+  let [isOpen, setOpen] = React.useState(false)
   const [data, setData] = React.useState(null)
   const textareaRef = React.useRef(null)
+  const tableRef = React.useRef(null)
 
   const getDays = (start: Date, end: Date) => {
     const daysArray = []
@@ -155,16 +156,26 @@ const Journal = () => {
     if (textareaRef && textareaRef.current) {
       textareaRef.current.value = JSON.stringify(data, null, 2)
       setOpen(true)
+      setTimeout(() => {
+        textareaRef.current.scrollIntoView({ behavior: 'smooth' })
+      }, 0);
     }
   }
 
   const applyData = () => {
     let value = ''
     if (textareaRef && textareaRef.current) {
+      if (textareaRef.current.value.length < 100) {
+        textareaRef.current.value = 'Error!'
+        return
+      }
+      tableRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
       value = textareaRef.current.value
       setData(JSON.parse(value))
-      localStorage.setItem('data', JSON.stringify(data, null, 2))
-      setOpen(false)
+      localStorage.setItem('data', value)
+      setTimeout(() => {
+        setOpen(false)
+      }, 1000)
     }
   }
 
@@ -172,15 +183,15 @@ const Journal = () => {
     <div className="journal w-full h-full">
       <p className="mb-4">This is my development journal.</p>
       <p className="mb-4">
-        When I do an action from the list, I will click on the cell.{' '}
+        When I do an action from the list, I will click on the cell.
       </p>
       <p className="mb-4">
-        This will mark the action as completed for that day.{' '}
+        This will mark the action as completed for that day.
       </p>
       <p className="mb-4">The data will be saved in localStorage.</p>
 
       <div className="overflow-scroll mb-4">
-        <table>
+        <table ref={tableRef}>
           <tr>{daysRender}</tr>
           {rows}
         </table>
