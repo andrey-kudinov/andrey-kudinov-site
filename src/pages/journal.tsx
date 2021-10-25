@@ -179,7 +179,7 @@ const Journal = () => {
       </p>
       <p className="mb-4">The data will be saved in localStorage.</p>
 
-      <div className="overflow-scroll mb-4">
+      <div className="overflow-scroll mb-4 border-r border-solid border-black">
         <table ref={tableRef}>
           <tr>{daysRender}</tr>
           {rows}
