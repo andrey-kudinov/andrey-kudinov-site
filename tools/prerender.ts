@@ -33,7 +33,7 @@ const remapPage = {
   default: '404'
 } as const
 
-const blackList = ['articles', 'journal'] as const
+const blackList = ['default', 'articles', 'journal'] as const
 
 const main = async () => {
   Object.keys(map).forEach(async (page) => {
@@ -52,7 +52,6 @@ const main = async () => {
     prerenders.push(
       new Promise(async (resolve, reject) => {
         let fileName = pageName
-        console.log(pageName)
 
         if (fileName === 'home') fileName = 'index'
 
