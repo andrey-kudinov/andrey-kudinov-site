@@ -18,11 +18,11 @@ export const map: Record<string, Function> = {
 const Router = () => {
   let [location] = useLocation()
   let Page = map[location] || map.default
-
+  console.log(location)
   return (
-    <div className="min-h-screen page">
-      <Header />
-      <main className="place-items-center w-full content py-4 overflow-x-hidden">
+    <div className={`min-h-screen ${location !== '/' ? 'page' : ''}`}>
+      {location !== '/' && <Header />}
+      <main className={`place-items-center w-full h-full content py-4 overflow-x-hidden ${location !== '/' ? '' : 'min-h-screen'}`}>
         <Page />
       </main>
     </div>

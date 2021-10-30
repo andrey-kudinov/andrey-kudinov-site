@@ -1,4 +1,5 @@
-import React, { SyntheticEvent, useRef } from 'react'
+import React, { useRef } from 'react'
+import { Link } from 'wouter'
 
 const Main = () => {
   const parentRef = useRef<HTMLDivElement>(null)
@@ -8,13 +9,162 @@ const Main = () => {
   const blockFourRef = useRef<HTMLDivElement>(null)
   const blockCenterRef = useRef<HTMLDivElement>(null)
 
-  const handleBlockOneOrFour = (
-    e: SyntheticEvent,
-    change: string,
-    change2: any,
-    change3: any
-  ) => {
-    e.stopPropagation()
+  const colors = [
+    'AliceBlue',
+    'AntiqueWhite',
+    'Aqua',
+    'Aquamarine',
+    'Azure',
+    'Beige',
+    'Bisque',
+    'Black',
+    'BlanchedAlmond',
+    'Blue',
+    'BlueViolet',
+    'Brown',
+    'BurlyWood',
+    'CadetBlue',
+    'Chartreuse',
+    'Chocolate',
+    'Coral',
+    'CornflowerBlue',
+    'Cornsilk',
+    'Crimson',
+    'Cyan',
+    'DarkBlue',
+    'DarkCyan',
+    'DarkGoldenRod',
+    'DarkGray',
+    'DarkGrey',
+    'DarkGreen',
+    'DarkKhaki',
+    'DarkMagenta',
+    'DarkOliveGreen',
+    'DarkOrange',
+    'DarkOrchid',
+    'DarkRed',
+    'DarkSalmon',
+    'DarkSeaGreen',
+    'DarkSlateBlue',
+    'DarkSlateGray',
+    'DarkSlateGrey',
+    'DarkTurquoise',
+    'DarkViolet',
+    'DeepPink',
+    'DeepSkyBlue',
+    'DimGray',
+    'DimGrey',
+    'DodgerBlue',
+    'FireBrick',
+    'FloralWhite',
+    'ForestGreen',
+    'Fuchsia',
+    'Gainsboro',
+    'GhostWhite',
+    'Gold',
+    'GoldenRod',
+    'Gray',
+    'Grey',
+    'Green',
+    'GreenYellow',
+    'HoneyDew',
+    'HotPink',
+    'IndianRed',
+    'Indigo',
+    'Ivory',
+    'Khaki',
+    'Lavender',
+    'LavenderBlush',
+    'LawnGreen',
+    'LemonChiffon',
+    'LightBlue',
+    'LightCoral',
+    'LightCyan',
+    'LightGoldenRodYellow',
+    'LightGray',
+    'LightGrey',
+    'LightGreen',
+    'LightPink',
+    'LightSalmon',
+    'LightSeaGreen',
+    'LightSkyBlue',
+    'LightSlateGray',
+    'LightSlateGrey',
+    'LightSteelBlue',
+    'LightYellow',
+    'Lime',
+    'LimeGreen',
+    'Linen',
+    'Magenta',
+    'Maroon',
+    'MediumAquaMarine',
+    'MediumBlue',
+    'MediumOrchid',
+    'MediumPurple',
+    'MediumSeaGreen',
+    'MediumSlateBlue',
+    'MediumSpringGreen',
+    'MediumTurquoise',
+    'MediumVioletRed',
+    'MidnightBlue',
+    'MintCream',
+    'MistyRose',
+    'Moccasin',
+    'NavajoWhite',
+    'Navy',
+    'OldLace',
+    'Olive',
+    'OliveDrab',
+    'Orange',
+    'OrangeRed',
+    'Orchid',
+    'PaleGoldenRod',
+    'PaleGreen',
+    'PaleTurquoise',
+    'PaleVioletRed',
+    'PapayaWhip',
+    'PeachPuff',
+    'Peru',
+    'Pink',
+    'Plum',
+    'PowderBlue',
+    'Purple',
+    'RebeccaPurple',
+    'Red',
+    'RosyBrown',
+    'RoyalBlue',
+    'SaddleBrown',
+    'Salmon',
+    'SandyBrown',
+    'SeaGreen',
+    'SeaShell',
+    'Sienna',
+    'Silver',
+    'SkyBlue',
+    'SlateBlue',
+    'SlateGray',
+    'SlateGrey',
+    'Snow',
+    'SpringGreen',
+    'SteelBlue',
+    'Tan',
+    'Teal',
+    'Thistle',
+    'Tomato',
+    'Turquoise',
+    'Violet',
+    'Wheat',
+    'White',
+    'WhiteSmoke',
+    'Yellow',
+    'YellowGreen'
+  ]
+
+  const getRandomColor = () => {
+    return colors[Math.floor(Math.random() * colors.length)]
+  }
+
+  const handleBlockLeave = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -23,58 +173,30 @@ const Main = () => {
       blockFourRef.current &&
       blockCenterRef.current
     ) {
-      const { width: parentWidth, height: parentHeight } =
-        parentRef.current.getBoundingClientRect()
-      const { width: blockOneWidth, height: blockOneHeight } =
-        blockOneRef.current.getBoundingClientRect()
-      const { width: blockTwoWidth, height: blockTwoHeight } =
-        blockTwoRef.current.getBoundingClientRect()
-      const { width: blockThreeWidth, height: blockThreeHeight } =
-        blockThreeRef.current.getBoundingClientRect()
-      const { width: blockFourWidth, height: blockFourHeight } =
-        blockFourRef.current.getBoundingClientRect()
+      blockOneRef.current.style.width = '60%'
+      blockOneRef.current.style.height = '40%'
+      blockOneRef.current.style.background = 'transparent'
 
-      blockOneRef.current.style.width = `calc(${Math.round(
-        (blockOneWidth / parentWidth) * 100
-      )}% ${change})`
-      blockOneRef.current.style.height = `calc(${Math.round(
-        (blockOneHeight / parentHeight) * 100
-      )}% ${change}`
+      blockTwoRef.current.style.width = '40%'
+      blockTwoRef.current.style.height = '60%'
+      blockTwoRef.current.style.background = 'transparent'
 
-      blockTwoRef.current.style.width = `calc(${Math.round(
-        (blockTwoWidth / parentWidth) * 100
-      )}% ${change2})`
-      blockTwoRef.current.style.height = `calc(${
-        (blockTwoHeight / parentHeight) * 100
-      }% ${change}`
+      blockThreeRef.current.style.width = '40%'
+      blockThreeRef.current.style.height = '60%'
+      blockThreeRef.current.style.background = 'transparent'
 
-      blockThreeRef.current.style.width = `calc(${Math.round(
-        (blockThreeWidth / parentWidth) * 100
-      )}% ${change}`
-      blockThreeRef.current.style.height = `calc(${Math.round(
-        (blockThreeHeight / parentHeight) * 100
-      )}% ${change2}`
+      blockFourRef.current.style.width = '60%'
+      blockFourRef.current.style.height = '40%'
+      blockFourRef.current.style.background = 'transparent'
 
-      blockFourRef.current.style.width = `calc(${Math.round(
-        (blockFourWidth / parentWidth) * 100
-      )}% ${change2}`
-      blockFourRef.current.style.height = `calc(${Math.round(
-        (blockFourHeight / parentHeight) * 100
-      )}% ${change2}`
-
-      blockCenterRef.current.style.top = `${change3}`
-      blockCenterRef.current.style.left = `${change3}`
+      blockCenterRef.current.style.top = '40%'
+      blockCenterRef.current.style.left = '40%'
+      blockCenterRef.current.style.width = '20%'
+      blockCenterRef.current.style.height = '20%'
     }
   }
 
-  const handleBlockTwoOrThree = (
-    e: SyntheticEvent,
-    change: string,
-    change2: any,
-    change3: any,
-    change4: any
-  ) => {
-    e.stopPropagation()
+  const handleBlockOneEnter = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -83,47 +205,130 @@ const Main = () => {
       blockFourRef.current &&
       blockCenterRef.current
     ) {
-      const { width: parentWidth, height: parentHeight } =
-        parentRef.current.getBoundingClientRect()
-      const { width: blockOneWidth, height: blockOneHeight } =
-        blockOneRef.current.getBoundingClientRect()
-      const { width: blockTwoWidth, height: blockTwoHeight } =
-        blockTwoRef.current.getBoundingClientRect()
-      const { width: blockThreeWidth, height: blockThreeHeight } =
-        blockThreeRef.current.getBoundingClientRect()
-      const { width: blockFourWidth, height: blockFourHeight } =
-        blockFourRef.current.getBoundingClientRect()
+      blockOneRef.current.style.width = '70%'
+      blockOneRef.current.style.height = '50%'
+      blockOneRef.current.style.background = getRandomColor()
 
-      blockOneRef.current.style.width = `calc(${Math.round(
-        (blockOneWidth / parentWidth) * 100
-      )}% ${change})`
-      blockOneRef.current.style.height = `calc(${Math.round(
-        (blockOneHeight / parentHeight) * 100
-      )}% ${change2}`
+      blockTwoRef.current.style.width = '30%'
+      blockTwoRef.current.style.height = '70%'
 
-      blockTwoRef.current.style.width = `calc(${Math.round(
-        (blockTwoWidth / parentWidth) * 100
-      )}% ${change2})`
-      blockTwoRef.current.style.height = `calc(${
-        (blockTwoHeight / parentHeight) * 100
-      }% ${change2}`
+      blockThreeRef.current.style.width = '50%'
+      blockThreeRef.current.style.height = '50%'
 
-      blockThreeRef.current.style.width = `calc(${Math.round(
-        (blockThreeWidth / parentWidth) * 100
-      )}% ${change}`
-      blockThreeRef.current.style.height = `calc(${Math.round(
-        (blockThreeHeight / parentHeight) * 100
-      )}% ${change}`
+      blockFourRef.current.style.width = '50%'
+      blockFourRef.current.style.height = '30%'
 
-      blockFourRef.current.style.width = `calc(${Math.round(
-        (blockFourWidth / parentWidth) * 100
-      )}% ${change2}`
-      blockFourRef.current.style.height = `calc(${Math.round(
-        (blockFourHeight / parentHeight) * 100
-      )}% ${change}`
+      blockCenterRef.current.style.top = '50%'
+      blockCenterRef.current.style.left = '50%'
+    }
+  }
 
-      blockCenterRef.current.style.top = `${change3}`
-      blockCenterRef.current.style.left = `${change4}`
+  const handleBlockTwoEnter = () => {
+    if (
+      parentRef.current &&
+      blockOneRef.current &&
+      blockTwoRef.current &&
+      blockThreeRef.current &&
+      blockFourRef.current &&
+      blockCenterRef.current
+    ) {
+      blockOneRef.current.style.width = '45%'
+      blockOneRef.current.style.height = '55%'
+
+      blockTwoRef.current.style.width = '55%'
+      blockTwoRef.current.style.height = '75%'
+      blockTwoRef.current.style.background = getRandomColor()
+
+      blockThreeRef.current.style.width = '25%'
+      blockThreeRef.current.style.height = '45%'
+
+      blockFourRef.current.style.width = '75%'
+      blockFourRef.current.style.height = '25%'
+
+      blockCenterRef.current.style.top = '55%'
+      blockCenterRef.current.style.left = '25%'
+    }
+  }
+
+  const handleBlockThreeEnter = () => {
+    if (
+      parentRef.current &&
+      blockOneRef.current &&
+      blockTwoRef.current &&
+      blockThreeRef.current &&
+      blockFourRef.current &&
+      blockCenterRef.current
+    ) {
+      blockOneRef.current.style.width = '75%'
+      blockOneRef.current.style.height = '40%'
+
+      blockTwoRef.current.style.width = '25%'
+      blockTwoRef.current.style.height = '60%'
+
+      blockThreeRef.current.style.width = '55%'
+      blockThreeRef.current.style.height = '60%'
+      blockThreeRef.current.style.background = getRandomColor()
+
+      blockFourRef.current.style.width = '45%'
+      blockFourRef.current.style.height = '40%'
+
+      blockCenterRef.current.style.top = '40%'
+      blockCenterRef.current.style.left = '55%'
+    }
+  }
+
+  const handleBlockFourEnter = () => {
+    if (
+      parentRef.current &&
+      blockOneRef.current &&
+      blockTwoRef.current &&
+      blockThreeRef.current &&
+      blockFourRef.current &&
+      blockCenterRef.current
+    ) {
+      blockOneRef.current.style.width = '50%'
+      blockOneRef.current.style.height = '30%'
+
+      blockTwoRef.current.style.width = '50%'
+      blockTwoRef.current.style.height = '50%'
+
+      blockThreeRef.current.style.width = '30%'
+      blockThreeRef.current.style.height = '70%'
+
+      blockFourRef.current.style.width = '70%'
+      blockFourRef.current.style.height = '50%'
+      blockFourRef.current.style.background = getRandomColor()
+
+      blockCenterRef.current.style.top = '30%'
+      blockCenterRef.current.style.left = '30%'
+    }
+  }
+
+  const handleBlockCenterEnter = () => {
+    if (
+      parentRef.current &&
+      blockOneRef.current &&
+      blockTwoRef.current &&
+      blockThreeRef.current &&
+      blockFourRef.current &&
+      blockCenterRef.current
+    ) {
+      blockOneRef.current.style.width = '30%'
+      blockOneRef.current.style.height = '70%'
+
+      blockTwoRef.current.style.width = '70%'
+      blockTwoRef.current.style.height = '30%'
+
+      blockThreeRef.current.style.width = '70%'
+      blockThreeRef.current.style.height = '30%'
+
+      blockFourRef.current.style.width = '30%'
+      blockFourRef.current.style.height = '70%'
+
+      blockCenterRef.current.style.top = '30%'
+      blockCenterRef.current.style.left = '30%'
+      blockCenterRef.current.style.width = '40%'
+      blockCenterRef.current.style.height = '40%'
     }
   }
 
@@ -132,36 +337,53 @@ const Main = () => {
       <div
         ref={blockOneRef}
         className="block block-1"
-        onMouseEnter={(e) => handleBlockOneOrFour(e, '+ 10%', '- 10%', '50%')}
-        onMouseLeave={(e) => handleBlockOneOrFour(e, '- 10%', '+ 10%', '40%')}
-      ></div>
+        onMouseEnter={() => handleBlockOneEnter()}
+        onMouseLeave={() => handleBlockLeave()}
+      >
+        <Link href="/articles">
+          <a>Articles</a>
+        </Link>
+      </div>
       <div
         ref={blockTwoRef}
         className="block block-2"
-        onMouseEnter={(e) =>
-          handleBlockTwoOrThree(e, '- 10%', '+ 10%', '50%', '30%')
-        }
-        onMouseLeave={(e) =>
-          handleBlockTwoOrThree(e, '+ 10%', '- 10%', '40%', '40%')
-        }
-      ></div>
+        onMouseEnter={() => handleBlockTwoEnter()}
+        onMouseLeave={() => handleBlockLeave()}
+      >
+        <Link href="/journal">
+          <a>Journal</a>
+        </Link>
+      </div>
       <div
         ref={blockThreeRef}
         className="block block-3"
-        onMouseEnter={(e) =>
-          handleBlockTwoOrThree(e, '+ 10%', '- 10%', '30%', '50%')
-        }
-        onMouseLeave={(e) =>
-          handleBlockTwoOrThree(e, '- 10%', '+ 10%', '40%', '40%')
-        }
-      ></div>
+        onMouseEnter={() => handleBlockThreeEnter()}
+        onMouseLeave={() => handleBlockLeave()}
+      >
+        <Link href="/about">
+          <a>About Me</a>
+        </Link>
+      </div>
       <div
         ref={blockFourRef}
         className="block block-4"
-        onMouseEnter={(e) => handleBlockOneOrFour(e, '- 10%', '+ 10%', '30%')}
-        onMouseLeave={(e) => handleBlockOneOrFour(e, '+ 10%', '- 10%', '40%')}
-      ></div>
-      <div ref={blockCenterRef} className="block block-center"></div>
+        onMouseEnter={() => handleBlockFourEnter()}
+        onMouseLeave={() => handleBlockLeave()}
+      >
+        <Link href="/hire">
+          <a>Hire Me</a>
+        </Link>
+      </div>
+      <div
+        ref={blockCenterRef}
+        className="block block-center"
+        onMouseEnter={() => handleBlockCenterEnter()}
+        onMouseLeave={() => handleBlockLeave()}
+      >
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+      </div>
     </div>
   )
 }

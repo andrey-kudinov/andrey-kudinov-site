@@ -5,28 +5,36 @@
   height: 100%;
 
   .block {
-    border: 1px solid tomato;
     position: absolute;
-    transition: 0.3s linear;
+    cursor: pointer;
+    transition: .3s linear;
+    border: 1px solid tomato;
+
+    a {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+    }
   }
 
   .block-1 {
-    left: 0;
     top: 0;
+    left: 0;
     width: 60%;
     height: 40%;
   }
 
   .block-2 {
-    right: 0;
     top: 0;
+    right: 0;
     width: 40%;
     height: 60%;
   }
 
   .block-3 {
-    left: 0%;
     bottom: 0;
+    left: 0;
     width: 40%;
     height: 60%;
   }
@@ -39,9 +47,11 @@
   }
 
   .block-center {
-    left: 40%;
+    z-index: 1;
     top: 40%;
+    left: 40%;
     width: 20%;
     height: 20%;
+    background: white;
   }
 }
