@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Link } from 'wouter'
+import { getColor } from '@atoms'
 
 const Main = () => {
   const parentRef = useRef<HTMLDivElement>(null)
@@ -9,162 +10,7 @@ const Main = () => {
   const blockFourRef = useRef<HTMLDivElement>(null)
   const blockCenterRef = useRef<HTMLDivElement>(null)
 
-  const colors = [
-    'AliceBlue',
-    'AntiqueWhite',
-    'Aqua',
-    'Aquamarine',
-    'Azure',
-    'Beige',
-    'Bisque',
-    'Black',
-    'BlanchedAlmond',
-    'Blue',
-    'BlueViolet',
-    'Brown',
-    'BurlyWood',
-    'CadetBlue',
-    'Chartreuse',
-    'Chocolate',
-    'Coral',
-    'CornflowerBlue',
-    'Cornsilk',
-    'Crimson',
-    'Cyan',
-    'DarkBlue',
-    'DarkCyan',
-    'DarkGoldenRod',
-    'DarkGray',
-    'DarkGrey',
-    'DarkGreen',
-    'DarkKhaki',
-    'DarkMagenta',
-    'DarkOliveGreen',
-    'DarkOrange',
-    'DarkOrchid',
-    'DarkRed',
-    'DarkSalmon',
-    'DarkSeaGreen',
-    'DarkSlateBlue',
-    'DarkSlateGray',
-    'DarkSlateGrey',
-    'DarkTurquoise',
-    'DarkViolet',
-    'DeepPink',
-    'DeepSkyBlue',
-    'DimGray',
-    'DimGrey',
-    'DodgerBlue',
-    'FireBrick',
-    'FloralWhite',
-    'ForestGreen',
-    'Fuchsia',
-    'Gainsboro',
-    'GhostWhite',
-    'Gold',
-    'GoldenRod',
-    'Gray',
-    'Grey',
-    'Green',
-    'GreenYellow',
-    'HoneyDew',
-    'HotPink',
-    'IndianRed',
-    'Indigo',
-    'Ivory',
-    'Khaki',
-    'Lavender',
-    'LavenderBlush',
-    'LawnGreen',
-    'LemonChiffon',
-    'LightBlue',
-    'LightCoral',
-    'LightCyan',
-    'LightGoldenRodYellow',
-    'LightGray',
-    'LightGrey',
-    'LightGreen',
-    'LightPink',
-    'LightSalmon',
-    'LightSeaGreen',
-    'LightSkyBlue',
-    'LightSlateGray',
-    'LightSlateGrey',
-    'LightSteelBlue',
-    'LightYellow',
-    'Lime',
-    'LimeGreen',
-    'Linen',
-    'Magenta',
-    'Maroon',
-    'MediumAquaMarine',
-    'MediumBlue',
-    'MediumOrchid',
-    'MediumPurple',
-    'MediumSeaGreen',
-    'MediumSlateBlue',
-    'MediumSpringGreen',
-    'MediumTurquoise',
-    'MediumVioletRed',
-    'MidnightBlue',
-    'MintCream',
-    'MistyRose',
-    'Moccasin',
-    'NavajoWhite',
-    'Navy',
-    'OldLace',
-    'Olive',
-    'OliveDrab',
-    'Orange',
-    'OrangeRed',
-    'Orchid',
-    'PaleGoldenRod',
-    'PaleGreen',
-    'PaleTurquoise',
-    'PaleVioletRed',
-    'PapayaWhip',
-    'PeachPuff',
-    'Peru',
-    'Pink',
-    'Plum',
-    'PowderBlue',
-    'Purple',
-    'RebeccaPurple',
-    'Red',
-    'RosyBrown',
-    'RoyalBlue',
-    'SaddleBrown',
-    'Salmon',
-    'SandyBrown',
-    'SeaGreen',
-    'SeaShell',
-    'Sienna',
-    'Silver',
-    'SkyBlue',
-    'SlateBlue',
-    'SlateGray',
-    'SlateGrey',
-    'Snow',
-    'SpringGreen',
-    'SteelBlue',
-    'Tan',
-    'Teal',
-    'Thistle',
-    'Tomato',
-    'Turquoise',
-    'Violet',
-    'Wheat',
-    'White',
-    'WhiteSmoke',
-    'Yellow',
-    'YellowGreen'
-  ]
-
-  const getRandomColor = () => {
-    return colors[Math.floor(Math.random() * colors.length)]
-  }
-
-  const handleBlockLeave = () => {
+  const handleBlockMouseLeave = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -193,10 +39,11 @@ const Main = () => {
       blockCenterRef.current.style.left = '40%'
       blockCenterRef.current.style.width = '20%'
       blockCenterRef.current.style.height = '20%'
+      blockCenterRef.current.style.borderColor = 'transparent'
     }
   }
 
-  const handleBlockOneEnter = () => {
+  const handleBlockOneMouseEnter = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -207,7 +54,7 @@ const Main = () => {
     ) {
       blockOneRef.current.style.width = '70%'
       blockOneRef.current.style.height = '50%'
-      blockOneRef.current.style.background = getRandomColor()
+      blockOneRef.current.style.background = getColor()
 
       blockTwoRef.current.style.width = '30%'
       blockTwoRef.current.style.height = '70%'
@@ -223,7 +70,7 @@ const Main = () => {
     }
   }
 
-  const handleBlockTwoEnter = () => {
+  const handleBlockTwoMouseEnter = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -237,7 +84,7 @@ const Main = () => {
 
       blockTwoRef.current.style.width = '55%'
       blockTwoRef.current.style.height = '75%'
-      blockTwoRef.current.style.background = getRandomColor()
+      blockTwoRef.current.style.background = getColor()
 
       blockThreeRef.current.style.width = '25%'
       blockThreeRef.current.style.height = '45%'
@@ -250,7 +97,7 @@ const Main = () => {
     }
   }
 
-  const handleBlockThreeEnter = () => {
+  const handleBlockThreeMouseEnter = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -267,7 +114,7 @@ const Main = () => {
 
       blockThreeRef.current.style.width = '55%'
       blockThreeRef.current.style.height = '60%'
-      blockThreeRef.current.style.background = getRandomColor()
+      blockThreeRef.current.style.background = getColor()
 
       blockFourRef.current.style.width = '45%'
       blockFourRef.current.style.height = '40%'
@@ -277,7 +124,7 @@ const Main = () => {
     }
   }
 
-  const handleBlockFourEnter = () => {
+  const handleBlockFourMouseEnter = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -297,14 +144,14 @@ const Main = () => {
 
       blockFourRef.current.style.width = '70%'
       blockFourRef.current.style.height = '50%'
-      blockFourRef.current.style.background = getRandomColor()
+      blockFourRef.current.style.background = getColor()
 
       blockCenterRef.current.style.top = '30%'
       blockCenterRef.current.style.left = '30%'
     }
   }
 
-  const handleBlockCenterEnter = () => {
+  const handleBlockCenterMouseEnter = () => {
     if (
       parentRef.current &&
       blockOneRef.current &&
@@ -329,16 +176,17 @@ const Main = () => {
       blockCenterRef.current.style.left = '30%'
       blockCenterRef.current.style.width = '40%'
       blockCenterRef.current.style.height = '40%'
+      blockCenterRef.current.style.borderColor = 'black'
     }
   }
 
   return (
-    <div className="home" ref={parentRef}>
+    <div className="home relative w-full h-full text-4xl" ref={parentRef}>
       <div
         ref={blockOneRef}
-        className="block block-1"
-        onMouseEnter={() => handleBlockOneEnter()}
-        onMouseLeave={() => handleBlockLeave()}
+        className="block block-1 top-0 left-0 w-3/5 h-2/5"
+        onMouseEnter={() => handleBlockOneMouseEnter()}
+        onMouseLeave={() => handleBlockMouseLeave()}
       >
         <Link href="/articles">
           <a>Articles</a>
@@ -346,9 +194,9 @@ const Main = () => {
       </div>
       <div
         ref={blockTwoRef}
-        className="block block-2"
-        onMouseEnter={() => handleBlockTwoEnter()}
-        onMouseLeave={() => handleBlockLeave()}
+        className="block block-2 top-0 right-0 w-2/5 h-3/5"
+        onMouseEnter={() => handleBlockTwoMouseEnter()}
+        onMouseLeave={() => handleBlockMouseLeave()}
       >
         <Link href="/journal">
           <a>Journal</a>
@@ -356,9 +204,9 @@ const Main = () => {
       </div>
       <div
         ref={blockThreeRef}
-        className="block block-3"
-        onMouseEnter={() => handleBlockThreeEnter()}
-        onMouseLeave={() => handleBlockLeave()}
+        className="block block-3 bottom-0 left-0 w-2/5 h-3/5"
+        onMouseEnter={() => handleBlockThreeMouseEnter()}
+        onMouseLeave={() => handleBlockMouseLeave()}
       >
         <Link href="/about">
           <a>About Me</a>
@@ -366,9 +214,9 @@ const Main = () => {
       </div>
       <div
         ref={blockFourRef}
-        className="block block-4"
-        onMouseEnter={() => handleBlockFourEnter()}
-        onMouseLeave={() => handleBlockLeave()}
+        className="block block-4 bottom-0 right-0 w-3/5 h-2/5"
+        onMouseEnter={() => handleBlockFourMouseEnter()}
+        onMouseLeave={() => handleBlockMouseLeave()}
       >
         <Link href="/hire">
           <a>Hire Me</a>
@@ -376,9 +224,9 @@ const Main = () => {
       </div>
       <div
         ref={blockCenterRef}
-        className="block block-center"
-        onMouseEnter={() => handleBlockCenterEnter()}
-        onMouseLeave={() => handleBlockLeave()}
+        className="block block-center w-1/5 h-1/5 bg-white z-10"
+        onMouseEnter={() => handleBlockCenterMouseEnter()}
+        onMouseLeave={() => handleBlockMouseLeave()}
       >
         <Link href="/">
           <a>Home</a>
