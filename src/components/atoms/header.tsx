@@ -24,10 +24,6 @@ const Header = () => {
 
   return (
     <header className="relative bg-gray-100 shadow content">
-      {/* <div className="p-4 flex items-center"> */}
-      {/* <ActiveLink href="/" className="font-bold text-base">
-          Andrey Kudinov
-        </ActiveLink> */}
       <nav className="nav">
         <button
           className="flex md:hidden"
@@ -61,7 +57,6 @@ const Header = () => {
           })}
         </ul>
       </nav>
-      {/* </div> */}
     </header>
   )
 }
