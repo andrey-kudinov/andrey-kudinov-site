@@ -8,6 +8,7 @@ const Articles = () => {
     <>
       <span>Articles</span>
       <Link href="/articles/grid">Grid</Link>
+      <Link href="/articles/algorithms">Algorithms</Link>
     </>
   )
 }

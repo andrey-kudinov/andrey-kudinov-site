@@ -29,6 +29,7 @@ const remapPage = {
   '/about': 'about',
   '/hire': 'hire',
   '/articles/grid': 'grid',
+  '/articles/algorithms': 'algorithms',
   '/journal': 'journal',
   default: '404'
 } as const
