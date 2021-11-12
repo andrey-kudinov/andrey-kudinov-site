@@ -83,16 +83,16 @@ const Journal = () => {
 
     setData(data)
 
-    // fetch(
-    //   'https://api.airtable.com/v0/app--/data?api_key=key--'
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
+    fetch(
+      `https://api.airtable.com/v0/${import.meta.env.VITE_APP}/data?api_key=${import.meta.env.VITE_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }, [])
 
   const onChange = (e: any) => {
